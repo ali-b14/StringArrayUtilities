@@ -1,7 +1,9 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by leon on 1/29/18.
@@ -145,7 +147,15 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        ArrayList<String> newArrayList = new ArrayList<>();
+        for(int i = 0; i < array.length; i++){
+            if(!array[i].equals(valueToRemove)){
+                newArrayList.add(array[i]);
+            }
+        }
+        String[] finalArray = newArrayList.toArray(new String[0]);
+
+        return finalArray;
     }
 
     /**
@@ -153,7 +163,15 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+
+        List<String> noDup = new ArrayList<>();
+        noDup.add(array[0]);
+        for(int i = 1; i < array.length; i++){
+            if(!array[i].equals(array[i - 1])){
+                noDup.add(array[i]);
+            }
+        }
+        return noDup.toArray(new String[0]);
     }
 
     /**
@@ -161,7 +179,24 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        List<String> holder = new ArrayList<>();
+        StringBuilder appending = new StringBuilder();
+
+
+        appending.append(array[0]);
+        for(int i = 1; i < array.length; i++){
+            if(array[i].equals(array[i - 1])){
+                appending.append(array[i]);
+            } else if (!array[i].equals(array[i - 1])) {
+                holder.add(appending.toString());
+                appending.setLength(0); //clears appending
+                appending.append(array[i]);
+
+            }
+        }
+        holder.add(appending.toString());
+
+        return holder.toArray(new String[0]);
     }
 
 
